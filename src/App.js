@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const App = (props) => {
   const [state, setState] = useState(props);
   const {name, price} = state;
+
+  useEffect(() => {
+    console.log('This is like componentDidMount or componentDidUpdate.');
+  });
+
+  // 初回レンダリングのみ
+  useEffect(() => {
+    console.log('This is like componentDidMount.');
+  }, []);
+
+  // nameを変更した時のみ
+  useEffect(() => {
+    console.log('This callback is for name.');
+  }, [name]);
 
   return (
     <>
