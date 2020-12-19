@@ -1,10 +1,11 @@
 import React, { useReducer, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import reducer from '../reducers'
-
+import reducer from '../reducers';
+import Event from '../components/Event';
 
 const App = () => {
+
   const [state, dispatch] = useReducer(reducer, []);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -14,6 +15,7 @@ const App = () => {
     dispatch({ type: 'CREATE_EVENT', title, body });
     setTitle('');
     setBody('');
+
   }
   
   console.log({state});
@@ -42,14 +44,16 @@ const App = () => {
               <th scope="col">ID</th>
               <th scope="col">タイトル</th>
               <th scope="col">ボディ</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {/* <tr>
               <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-            </tr>
+            </tr> */}
+            { state.map((event, index) => (<Event key={index} event={event} dispatch={dispatch} />))}
           </tbody>
         </table>
 
